@@ -1,0 +1,66 @@
+/* Základní reset pro odstranění výchozích stylů prohlížeče */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+/* Nastavení základního fontu pro celou stránku */
+body {
+    font-family: 'Arial', sans-serif; /* Moderní font */
+    background-color: #f4f4f9; /* Světle šedé pozadí */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+/* Kontejner pro zarovnání obsahu na střed */
+.container {
+    text-align: center;
+    background-color: #fff; /* Bílé pozadí pro obsah */
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); /* Měkký stín */
+    width: 80%;
+    max-width: 600px; /* Maximální šířka pro větší obrazovky */
+}
+
+/* Styl pro nadpis */
+h1 {
+    font-size: 2rem;
+    color: #333; /* Tmavě šedá barva pro text */
+    margin-bottom: 20px;
+}
+
+/* Styl pro textovou informaci o zařízení */
+#device {
+    font-size: 1.5rem;
+    color: #4CAF50; /* Zelená barva pro text */
+    font-weight: bold;
+    animation: fadeIn 1s ease-in-out; /* Přidání animace pro plynulé zobrazení */
+}
+
+/* Animace pro plynulé zobrazení textu */
+@keyframes fadeIn {
+    0% {
+        opacity: 0;
+        transform: translateY(20px);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* Základní responzivní design pro mobilní zařízení */
+@media (max-width: 600px) {
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    #device {
+        font-size: 1.2rem;
+    }
+}
