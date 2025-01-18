@@ -1,42 +1,38 @@
-const express = require('express');
+// netlify/functions/deviceCounter.js
 const cors = require('cors');
+const express = require('express');
+
+// Použij Express v rámci serverless funkce
 const app = express();
-const PORT = 3000;
+app.use(cors());
 
-app.use(cors());  // Povolí CORS
+// Data pro sledování
+let deviceCount = {
+  android: 0,
+  ios: 0,
+  windows: 0,
+  other: 0,
+};
 
-// In-memory "databáze" pro sledování počtu uživatelů
-let deviceCounts = {};
+app.get('/device-counter', (req, res) => {
+  const userAgent = req.headers['user-agent'].toLowerCase();
+  if (userAgent.includes('android')) {
+    deviceCount.android += 1;
+  } else if (userAgent.includes('iphone') || userAgent.includes('ipod')) {
+    deviceCount.ios += 1;
+  } else if (userAgent.includes('windows')) {
+    deviceCount.windows += 1;
+  } else {
+    deviceCount.other += 1;
+  }
 
-// Endpoint pro získání počtu uživatelů pro dané zařízení
-app.get('/device-count', (req, res) => {
-    const device = req.query.device;
-    if (!device) {
-        return res.status(400).send('Device type is required');
-    }
-
-    // Vratí počet uživatelů pro dané zařízení
-    const count = deviceCounts[device] || 0;
-    res.json({ device, count });
+  res.json(deviceCount);
 });
 
-// Endpoint pro aktualizaci počtu uživatelů pro dané zařízení
-app.post('/increment-device', (req, res) => {
-    const device = req.query.device;
-    if (!device) {
-        return res.status(400).send('Device type is required');
-    }
-
-    // Zvýšíme počet pro dané zařízení
-    if (!deviceCounts[device]) {
-        deviceCounts[device] = 0;
-    }
-    deviceCounts[device]++;
-
-    res.json({ device, count: deviceCounts[device] });
-});
-
-// Spustí server na portu 3000
-app.listen(PORT, () => {
-    console.log(`Server running at http://localhost:${PORT}`);
-});
+// Export funkce pro Netlify
+exports.handler = async (event, context) => {
+  return {
+    statusCode: 200,
+    body: JSON.stringify({ message: 'API is working', data: deviceCount }),
+  };
+};
