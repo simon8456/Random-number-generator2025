@@ -1,0 +1,8 @@
+[build]
+  functions = "netlify/functions"  # Složka, kde jsou serverless funkce
+  publish = "public"               # Složka, kde jsou soubory pro frontend (HTML, CSS, JS)
+
+[[redirects]]
+  from = "/device-counter"        # Cesta, která směřuje na serverless funkci
+  to = "/.netlify/functions/deviceCounter"  # Cesta k serverless funkci
+  status = 200
