@@ -1,20 +1,14 @@
-document.addEventListener('DOMContentLoaded', () => {
-    const button = document.querySelector('button');
-    const countDisplay = document.createElement('p');
-    document.body.appendChild(countDisplay);
+function GetDevice(){
+  if (navigator.userAgent.match(/Android/i)) {
+    return "Android";
+  } else if (navigator.userAgent.match(/iPhone/i)) {
+    return "iPhone";
+  } else if (navigator.userAgent.match(/iPad/i)) {
+    return "iPad";
+  } else {
+    return "Unknown";
+  }
+}
 
-    // Fetch the current click count from the server
-    fetch('/click-count')
-        .then(response => response.json())
-        .then(data => {
-            countDisplay.textContent = `Button clicked ${data.count} times`;
-        });
+document.getElementById("device").textContent = "Your device: " + GetDevice();
 
-    button.addEventListener('click', () => {
-        fetch('/increment-click', { method: 'POST' })
-            .then(response => response.json())
-            .then(data => {
-                countDisplay.textContent = `Button clicked ${data.count} times`;
-            });
-    });
-});
