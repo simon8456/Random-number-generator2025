@@ -8,5 +8,5 @@ button.addEventListener('click', () => {
 
 function generateRandomNumber() {
   const randomNumber = Math.floor(Math.random() * 100) + 1;
-  numberDisplay.textContent = `Generated number: ${randomNumber}`;
+  numberDisplay.textContent = randomNumber;
 }
