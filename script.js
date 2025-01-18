@@ -1,6 +1,6 @@
 // script.js
 const button = document.getElementById('generateButton');
-const numberDisplay = document.getElementById('number');
+const numberDisplay = document.getElementById('randomNumber');
 
 button.addEventListener('click', () => {
   generateRandomNumber();
